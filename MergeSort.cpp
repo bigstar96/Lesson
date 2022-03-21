@@ -1,15 +1,6 @@
 #include<iostream>
 
-void PrintArray(int input[], int size)
-{
-	for (int i = 0; i < size; ++i)
-	{
-		std::cout << input[i] << " ";
-	}
-	std::cout << std::endl;
-}
-
-void Swap(int& value1, int& value2)
+void Swap0(int& value1, int& value2)
 {
 	int temp = value1;
 	value1 = value2;
@@ -27,7 +18,7 @@ void SequentialSort(int input[], int size)
 		{
 			if (input[i] > input[j])
 			{
-				Swap(input[i], input[j]);
+				Swap0(input[i], input[j]);
 			}
 		}
 	}
@@ -51,7 +42,7 @@ void SelectionSort(int input[], int size)
 
 		if (minIndex != i)
 		{
-			Swap(input[i], input[minIndex]);
+			Swap0(input[i], input[minIndex]);
 		}
 	}
 }
@@ -67,7 +58,7 @@ void BubbleSort(int input[], int size)
 		{
 			if (input[left] > input[left + 1])
 			{
-				Swap(input[left], input[left + 1]);
+				Swap0(input[left], input[left + 1]);
 			}
 		}
 	}
@@ -80,7 +71,7 @@ void MyBubbleSort(int input[], int size)
 		{
 			if (input[j] > input[j + 1])
 			{
-				Swap(input[j], input[j + 1]);
+				Swap0(input[j], input[j + 1]);
 			}
 		}
 	}
@@ -108,8 +99,8 @@ void InsertionSort(int input[], int size)
 //----------------------------------------
 
 // Merge Sort
-// Time Complexity : 
-// Space Complexity : 
+// Time Complexity : O(n log n)
+// Space Complexity : O(n)
 void Merge(int input[], int start, int half, int end, int temp[])
 {
 	int i = start;

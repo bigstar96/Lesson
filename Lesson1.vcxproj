@@ -141,11 +141,9 @@
   <ItemGroup>
     <ClCompile Include="Lesson1.cpp" />
     <ClCompile Include="MergeSort.cpp" />
-    <ClCompile Include="MySource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MergeSort.h" />
-    <ClInclude Include="MyHeader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
