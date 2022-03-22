@@ -101,3 +101,11 @@ void ProcessUserInput(Stack& stack)
         }
     }
 }
+
+//int main()
+//{
+//    Stack myStack;
+//
+//    PrintInfo();
+//    ProcessUserInput(myStack);
+//}
