@@ -1,19 +1,9 @@
 ﻿#include<iostream>
+#include "LinkedList.h"
 
-
-// self referenced structure
-struct Monster
-{
-	int HP;
-	int MP;
-	
-	Monster* pNext;
-};
+// Single Linked List
 
 int main()
 {
-	Monster* monA = new Monster{ 10,10,nullptr };
-	Monster* monB = new Monster{ 100,0,nullptr };
-
-	monA->pNext = monB;
+	MonsterList myList;
 }
