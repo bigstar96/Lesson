@@ -15,7 +15,7 @@ struct Stack
     int topIndex{ -1 };
 };
 
-void PrintInfo()
+void Queue_PrintInfo()
 {
     std::cout << "<STACK>" << std::endl;
     std::cout << "[1] push" << std::endl;

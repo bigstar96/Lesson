@@ -1,128 +1,121 @@
-﻿#include <iostream>
+﻿#include<iostream>
+
+const int Circular_QUEUE_SIZE{ 10 };
 
 enum Command
 {
-    ENQUEUE = 1,
-    DEQUEUE = 2,
-    EXIT = 3
+	ENQUEUE = 1,
+	DEQUEUE = 2,
+	EXIT = 3
 };
 
-const int QUEUE_SIZE{ 10 };
-
-struct Queue
+struct Circular_Queue
 {
-    int array[QUEUE_SIZE]{};
-    int topIndex{ -1 };
+	int container[Circular_QUEUE_SIZE]{};
+	int head{};	
+	int tail{};
 };
 
-void QueueInfo()
+void Circular_PrintInfo()
 {
-    std::cout << "  <QUEUE>  " << std::endl;
-    std::cout << "[1] ENQUEUE" << std::endl;
-    std::cout << "[2] DEQUEUE" << std::endl;
-    std::cout << "[3]  EXIT  " << std::endl;
-    std::cout << "-----------" << std::endl;
+	std::cout << "<QUEUE>" << std::endl
+		<< "[1] enqueue" << std::endl
+		<< "[2] dequeue" << std::endl
+		<< "[3] exit" << std::endl
+		<< "-----------" << std::endl;
 }
 
-void PrintQueue(Queue& queue)
+void Circular_PrintQueue(Circular_Queue& queue)
 {
-    if (queue.topIndex < 0)
-    {
-        std::cout << "EMPTY" << std::endl;
-    }
+	std::cout << "---- queue ----" << std::endl;
 
-    for (int i = 0; i <= queue.topIndex; ++i)
-    {
-        std::cout << queue.array[i] << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "-----------" << std::endl;
+	if (queue.head == queue.tail)
+	{
+		std::cout << "EMPTY!" << std::endl;
+		return;
+	}
 
+	int i = queue.head;
+	while (i != queue.tail)
+	{
+		i = (i + 1) % Circular_QUEUE_SIZE;
+		std::cout << queue.container[i] << " ";
+	}
+	std::cout << std::endl << "--------" << std::endl;
 }
 
-void EnQueue(Queue& queue, int value)
+void Circular_Enqueue(Circular_Queue& queue, int value)
 {
-    if (queue.topIndex >= QUEUE_SIZE - 1)
-    {
-        std::cout << "줄이 꽉 찼습니다." << std::endl;
-        return;
-    }
-    queue.array[++queue.topIndex] = value;
+	if ((queue.tail + 1) % Circular_QUEUE_SIZE == queue.head)
+	{
+		std::cout << "Queue is FULL!" << std::endl;
+		return;
+	}
+
+	queue.tail = (queue.tail + 1) % Circular_QUEUE_SIZE;
+	queue.container[queue.tail] = value;
 }
 
-void DeQueue(Queue& queue)
+void Circular_Dequeue(Circular_Queue& queue)
 {
-    if (queue.topIndex < 0)
-    {
-        std::cout << "줄이 비어 있습니다. 더 이상 나갈 사람이 없어요..." << std::endl;
-        return;
-    }
+	if (queue.head == queue.tail)
+	{
+		std::cout << "Queue is EMPTY!" << std::endl;
+		return;
+	}
 
-    std::cout << queue.array[0] << "가 나갔습니다." << std::endl;
-    queue.topIndex--;
-
-    for (int i = 0; i < queue.topIndex; ++i)
-    {
-        if (queue.topIndex <= 0)
-        {
-            int temp = queue.array[i];
-            queue.array[i] = queue.array[i + 1];
-        }
-        else
-        {
-            queue.array[i] = queue.array[i + 1];
-            queue.array[i + 1] = queue.array[i + 2];
-        }
-        
-    }
+	queue.head = (queue.head + 1) % Circular_QUEUE_SIZE;
+	std::cout << queue.container[queue.head] << " is Dequeue!" << std::endl;
 }
 
-void ProcessUserInput(Queue& queue)
+void Circular_ProcessUserInput(Circular_Queue& queue)
 {
-    int command{};
-    bool isExit{ false };
+	int command{ -1 };
+	bool isExit{ false };
+	while (true)
+	{
+		Circular_PrintQueue(queue);
 
-    while (command != EXIT)
-    {
-        PrintQueue(queue);
-        std::cout << std::endl << "> ";
-        std::cin >> command;
-        switch (command)
-        {
-        case ENQUEUE:
-        {
-            int value{};
-            std::cout << "   Value>>";
-            std::cin >> value;
-            EnQueue(queue, value);
-            break;
-        }
+		std::cout << std::endl << "> ";
+		std::cin >> command;
 
-        case DEQUEUE:
-            DeQueue(queue);
-            break;
+		switch (command)
+		{
+		case ENQUEUE:
+		{
+			int value;
+			std::cout << "   value>> ";
+			std::cin >> value;
+			Circular_Enqueue(queue, value);
 
-        case EXIT:
-            isExit = true;
-            break;
+		}
+			break;
 
-        default:
-            std::cout << "잘못된 명렁어 입니다." << std::endl;
-            break;
-        }
+		case DEQUEUE:
+			Circular_Dequeue(queue);
+			break;
 
-        if (isExit)
-        {
-            break;
-        }
-    }
+		case EXIT:
+			isExit = true;
+			break;
+
+		default:
+			std::cout << "Inbalid Command!!" << std::endl;
+			break;
+		}
+		if (isExit)
+		{
+			break;
+		}
+	}
 }
+
 
 
 int main()
 {
-    Queue myQueue;
+	Circular_Queue myQueue;
 
-    QueueInfo();
-    ProcessUserInput(myQueue);
+	Circular_PrintInfo();
+	Circular_ProcessUserInput(myQueue);
 }
