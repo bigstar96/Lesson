@@ -15,7 +15,7 @@ struct Queue
     int topIndex{ -1 };
 };
 
-void PrintQueue()
+void QueueInfo()
 {
     std::cout << "  <QUEUE>  " << std::endl;
     std::cout << "[1] ENQUEUE" << std::endl;
@@ -63,9 +63,17 @@ void DeQueue(Queue& queue)
 
     for (int i = 0; i < queue.topIndex; ++i)
     {
-        int temp = queue.array[i + 2];
-        queue.array[i] = queue.array[i + 1];
-        queue.array[i + 1] = temp;
+        if (queue.topIndex <= 0)
+        {
+            int temp = queue.array[i];
+            queue.array[i] = queue.array[i + 1];
+        }
+        else
+        {
+            queue.array[i] = queue.array[i + 1];
+            queue.array[i + 1] = queue.array[i + 2];
+        }
+        
     }
 }
 
@@ -115,6 +123,6 @@ int main()
 {
     Queue myQueue;
 
-    PrintQueue();
+    QueueInfo();
     ProcessUserInput(myQueue);
 }
