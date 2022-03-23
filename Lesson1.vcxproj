@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circular_Queue.cpp" />
     <ClCompile Include="DataStructure.cpp" />
     <ClCompile Include="Lesson1.cpp" />
     <ClCompile Include="MergeSort.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circular_Queue.h" />
     <ClInclude Include="Datastructure.h" />
     <ClInclude Include="MergeSort.h" />
   </ItemGroup>
